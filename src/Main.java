@@ -1,5 +1,11 @@
+import java.util.List;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome to CodeAthlon 🚀");
+
+        List<Problem> problems = ProblemRepository.getDailyWorkout("Amazon", 2);
+
+        for (Problem p : problems) {
+            System.out.println(p.getTitle() + " | " + p.getTopic() + " | " + p.getDifficulty() + " | " + p.getCompany());
+        }
     }
 }
