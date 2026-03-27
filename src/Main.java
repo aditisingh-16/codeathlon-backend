@@ -13,7 +13,7 @@ public class Main {
         }
 
         // Streak simulation
-       UserStats user = new UserStats();
+        UserStats user = new UserStats();
 
         // Simulate yesterday activity
         user.setLastSolvedDate(java.time.LocalDate.now().minusDays(1));
@@ -22,5 +22,18 @@ public class Main {
         user.updateStreak(); // today
 
         System.out.println("\nCurrent Streak: " + user.getStreak());
+        ProgressTracker tracker = new ProgressTracker();
+
+        // Add problems (simulate daily plan)
+        tracker.addProblem("Arrays");
+        tracker.addProblem("Arrays");
+        tracker.addProblem("Dynamic Programming");
+
+        // Mark solved
+        tracker.markSolved("Arrays"); // solved 1 out of 2
+        tracker.markSolved("Dynamic Programming"); // solved 1 out of 1
+
+        // Show progress
+        tracker.showProgress();
     }
 }
