@@ -24,14 +24,16 @@ public class Main {
         System.out.println("\nCurrent Streak: " + user.getStreak());
         ProgressTracker tracker = new ProgressTracker();
 
-        // Add problems (simulate daily plan)
-        tracker.addProblem("Arrays");
-        tracker.addProblem("Arrays");
-        tracker.addProblem("Dynamic Programming");
+        // Add problems from workout
+        for (Problem p : problems) {
+            tracker.addProblem(p.getTopic());
+        }
 
-        // Mark solved
-        tracker.markSolved("Arrays"); // solved 1 out of 2
-        tracker.markSolved("Dynamic Programming"); // solved 1 out of 1
+        // Simulate solving all problems
+        if (!problems.isEmpty()) {
+            Problem p = problems.get(0); // solve only first problem
+            tracker.markSolved(p.getTopic());
+        }
 
         // Show progress
         tracker.showProgress();
