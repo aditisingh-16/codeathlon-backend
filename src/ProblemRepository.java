@@ -28,14 +28,38 @@ public class ProblemRepository {
         return filtered;
     }
     public static List<Problem> getDailyWorkout(String company, int count) {
-    List<Problem> companyProblems = getProblemsByCompany(company);
-    List<Problem> workout = new ArrayList<>();
-    Collections.shuffle(companyProblems);
+        List<Problem> companyProblems = getProblemsByCompany(company);
+        List<Problem> workout = new ArrayList<>();
+        Collections.shuffle(companyProblems);
 
-    for (int i = 0; i < count && i < companyProblems.size(); i++) {
-        workout.add(companyProblems.get(i));
+        for (int i = 0; i < count && i < companyProblems.size(); i++) {
+            workout.add(companyProblems.get(i));
+        }   
+
+        return workout;
     }
+    public static List<Problem> getBalancedWorkout(String company) {
+        List<Problem> companyProblems = getProblemsByCompany(company);
 
-    return workout;
-}
+        List<Problem> easy = new ArrayList<>();
+        List<Problem> medium = new ArrayList<>();
+
+        for (Problem p : companyProblems) {
+            if (p.getDifficulty().equalsIgnoreCase("Easy")) {
+                easy.add(p);
+            } else if (p.getDifficulty().equalsIgnoreCase("Medium")) {
+                medium.add(p);
+            }
+        }
+
+        Collections.shuffle(easy);
+        Collections.shuffle(medium);
+
+        List<Problem> workout = new ArrayList<>();
+
+        if (!easy.isEmpty()) workout.add(easy.get(0));
+        if (!medium.isEmpty()) workout.add(medium.get(0));
+
+        return workout;
+    }
 }
